@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="app-content main-container p-20" style="margin-top: 20px;">
+    <div 
+        class="flex font-weight-bold" 
+        style="margin-bottom: 20px;"
+        #up
+    >
+        <h2>
+            Pokedex <span style="font-size: 14px;">({{ allCount }} pokemons)</span>
+        </h2>
+
+        <div>
+
+        </div>
+    </div>
+
+    <div 
+        class="pokedex-list"
+        infiniteScroll
+        [infiniteScrollDistance]="3"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="getExtraPokemons()"
+    >
+        <div class="pokedex-grid">
+            <a
+                *ngFor="let item of pokemons; index as i; first as isFirst"
+                routerLink="/pokedex/{{ item.id }}"
+            >
+                <div 
+                    class="p-card-item" 
+                >
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{item.id}}.png" alt="">
+        
+                    <p>{{ item.name }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <nz-back-top [nzTarget]="up"></nz-back-top>
+</div>
